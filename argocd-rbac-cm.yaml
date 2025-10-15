@@ -1,0 +1,40 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+data:
+  policy.csv: |
+    # Admin role: Full access to all resources, including API key generation
+    p, role:admin, *, *, *, allow
+    p, role:admin, apiKey, *, *, allow
+
+    # Read-only role: View-only access to applications and projects
+    p, role:readonly, applications, get, *, allow
+    p, role:readonly, projects, get, *, allow
+
+    # Developer role: Manage applications but only view projects
+    p, role:developer, applications, *, *, allow
+    p, role:developer, projects, get, *, allow
+
+    # Example: Add more roles as needed
+    # p, role:custom-role, applications, get, *, allow
+  policy.default: role:readonly
+  policy.user: |
+    g, admin, role:admin
+    g, developer, role:developer
+    g, readonly, role:readonly
+  server.admin.apiKey: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"argocd-cmd-params-cm","app.kubernetes.io/part-of":"argocd"},"name":"argocd-cmd-params-cm","namespace":"argocd"}}
+  creationTimestamp: "2025-10-15T16:03:14Z"
+  labels:
+    app.kubernetes.io/name: argocd-cmd-params-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cmd-params-cm
+  namespace: argocd
+  resourceVersion: "14860"
+  uid: 82f213c6-f810-4a3a-a231-ed6b7cdd6827
