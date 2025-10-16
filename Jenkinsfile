@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     // agent {
     //     kubernetes {
     //         yamlFile 'kaniko-builder.yaml'
@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Argo CD Sync') {
             steps {
-                withCredentials([string(credentialsId: 'argocd-creds', variable: 'ARGOCD_AUTH_TOKEN')]) {
+                withCredentials([string(credentialsId: 'argocd-cred', variable: 'ARGOCD_AUTH_TOKEN')]) {
                     sh '''
                       set -e
                       # Optional: refresh app cache before sync
