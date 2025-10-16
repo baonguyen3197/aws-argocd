@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         ARGOCD_SERVER   = 'https://argocd-server.argocd.svc.cluster.local'
-        ARGOCD_APP_NAME = 'guestbook-ui'
+        ARGOCD_APP_NAME = 'guestbook'
     }
 
     stages {
